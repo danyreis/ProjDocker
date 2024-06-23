@@ -1,0 +1,42 @@
+#!/bin/bash
+
+echo "Criando diretorios"
+
+mkdir /publico
+mkdir /infra
+mkdir /gc
+mkdir /devs
+
+echo "Criando grupos de usuarios"
+
+groupadd GRP_INFRA
+groupadd GRP_GC
+groupadd GRP_DEVS
+
+echo "Criando usu  rios e associonando os grupos"
+
+useradd carlos -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_INFRA
+useradd maria -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_INFRA
+useradd joao -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_INFRA
+
+useradd debora -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_GC
+useradd sebastiana -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_GC
+useradd roberto -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_GC
+
+useradd josefina -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_DEVS
+useradd amanda -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_DEVS
+useradd rogerio -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_DEVS
+
+
+echo "Especificando permissoes do diretorio"
+
+chown root:GRP_ADM /infra
+chown root:GRP_VEN /gc
+chown root:GRP_SEC /devs
+
+chmod 770 /infra
+chmod 770 /gc
+chmod 770 /devs
+chmod 777 /publico
+
+echo "Fim!"
